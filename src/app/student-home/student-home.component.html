@@ -1,0 +1,200 @@
+<div class=" container pt-4">
+  <div class="row">
+    <div class="col">
+      <!-- Column 2: Messages section -->
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-secondary" type="button">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+          <h5 class="card-title d-flex align-items-center">Announcements</h5>
+
+          <!-- first doc -->
+          <div class="alert alert-info d-flex align-items-center" *ngIf="firstDoc && isLeader">
+            <div><i class="bi bi-dash-circle text-danger fs-4"></i></div>
+            <div class="text-center p-2">
+              <strong class="col-6">Click here to submit First Documentation</strong>
+              <button class="col-6" class="btn btn-outline-primary ms-3"
+                (click)="showIdeaDetailsModalFirstDoc()">Upload</button>
+            </div>
+          </div>
+
+          <!-- final doc -->
+          <div class="alert alert-info d-flex align-items-center" *ngIf="finalDoc && isLeader">
+            <div><i class="bi bi-dash-circle text-danger fs-4"></i></div>
+            <div class="text-center p-2">
+              <strong class="col-6">Click here to submit Final Documentation</strong>
+              <button class="col-6" class="btn btn-outline-primary ms-3"
+                (click)="showIdeaDetailsModalFinalDoc()">Upload</button>
+            </div>
+          </div>
+
+          <!-- first presentation -->
+          <div class="alert alert-info d-flex align-items-center" *ngIf="firstPre && isLeader">
+            <div><i class="bi bi-dash-circle text-danger fs-4"></i></div>
+            <div class="text-center p-2">
+              <strong class="col-6">Click here to submit First Presentation</strong>
+              <button class="col-6" class="btn btn-outline-primary ms-3"
+                (click)="showIdeaDetailsModalFisrtPresentation()">Upload</button>
+            </div>
+          </div>
+
+          <!-- final presentation -->
+          <div class="alert alert-info d-flex align-items-center" *ngIf="finalPre && isLeader">
+            <div><i class="bi bi-dash-circle text-danger fs-4"></i></div>
+            <div class="text-center p-2">
+              <strong class="col-6">Click here to submit Final Presentation</strong>
+              <button class="col-6" class="btn btn-outline-primary ms-3"
+                (click)="showIdeaDetailsModalSecondPresentation()">Upload</button>
+            </div>
+          </div>
+
+          <!-- final poster -->
+          <div class="alert alert-info d-flex align-items-center" *ngIf="poster && isLeader">
+            <div><i class="bi bi-dash-circle text-danger fs-4"></i></div>
+            <div class="text-center p-2">
+              <strong class="col-6">Click here to submit Poster</strong>
+              <button class="col-6" class="btn btn-outline-primary ms-3"
+                (click)="showIdeaDetailsModalPoster()">Upload</button>
+            </div>
+          </div>
+
+          <div *ngFor="let notification of notifications" class="alert alert-info d-flex align-items-center">
+            <div><i class="bi bi-dash-circle text-danger fs-4"></i></div>
+            <div class=" text-center p-2">
+              <strong>{{getNotificationSender(notification.sender_role)}}: {{notification.title}}</strong>
+              <span>{{notification.content}}</span>
+            </div>
+          </div>
+
+          <div class="alert alert-danger"
+            *ngIf="!(messageNotification == '') || firstDoc || finalDoc || firstPre || finalPre || poster">
+            {{messageNotification}}</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- first doc -->
+<div id=" fileUploadModalFirstDoc" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">First Documentation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="mb-3">
+            <input type="file" class="form-control" id="fileInput">
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-action="submitFile"
+          (click)="submitFirstDoc()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- final doc -->
+<div id="fileUploadModalFinalDoc" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Final Documentation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="mb-3">
+            <input type="file" class="form-control" id="fileInputfinaldoc">
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-action="submitFile"
+          (click)="submitFinalDoc()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- first presentation -->
+<div id="fileUploadModalFisrtPresentation" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">First Presentation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="mb-3">
+            <input type="file" class="form-control" id="fileInputfirstpresentation">
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-action="submitFile"
+          (click)="submitFirstPresentation()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- final presentation -->
+<div id="fileUploadModalSecondPresentation" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Final Presentation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="mb-3">
+            <input type="file" class="form-control" id="fileInputfinalPresentation">
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-action="submitFile"
+          (click)="submitFinalPresentation()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- poster -->
+<div id="fileUploadModalPoster" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Poster</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="mb-3">
+            <input type="file" class="form-control" id="fileInputPoster">
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-action="submitFile" (click)="submitPoster()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

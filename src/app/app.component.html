@@ -1,0 +1,45 @@
+<!-- <!DOCTYPE html>
+<html lang="en" style="overflow: hidden;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPS</title>
+</head>
+
+<body> -->
+  <section class="bg-white">
+
+    <div class="container-fluied mt-2">
+      <div class="row align-items-center ">
+        <div class="col-md-8 d-flex align-items-center">
+          <img class="navbar-brand" src="./assets/OIP.jpg" alt="Logo" width="70" height="70">
+          <h4 class="ms-2 me-2">FCAI-CU</h4>
+        </div>
+        <div class="col-md-4 d-flex justify-content-end">
+          <ul class="d-flex list-unstyled">
+            <li class="p-2 me-5 nav-item active fs-6">
+              <a class="nav-link " aria-current="page" routerLink="home" routerLinkActive="active">Home</a>
+            </li>
+            <li class="nav-item p-2 me-5 fs-6">
+              <a class="nav-link" routerLink="previousProjects" routerLinkActive="active">Projects</a>
+            </li>
+            <li class="nav-item p-2 me-5 fs-6">
+              <a class="nav-link" (click)="logout()" *ngIf="this.getLogStatus() == true" routerLink="">Logout</a>
+              <!-- <a class="nav-link" (click)="logout()" (hidden)="this.getLogStatus() == false" routerLink="login" routerLinkActive="active">Login</a> -->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  
+  <div><router-outlet></router-outlet></div>
+
+<!-- </body>
+
+</html> -->
+<!-- <footer class="mb-0" style="max-height: 20px;">
+  <app-footer></app-footer>
+</footer>  -->

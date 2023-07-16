@@ -1,0 +1,27 @@
+<div class="container pt-3">
+  <div class="card text-center">
+    <div class="card-header">
+      <h3>Team Tasks</h3>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Deadline</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks">
+            <td>{{ task.name }}</td>
+            <td>{{ task.deadline }}</td>
+            <td>
+              <i [ngClass]="{ 'fas fa-check-circle text-success': task.status === 'Assigned', 'fa fa-times-circle text-danger': task.status === 'Not Assigned' }"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

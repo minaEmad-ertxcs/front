@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>All Communities</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let community of communities">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ community.name }}</h5>
+              <p class="card-text">{{ community.description }}</p>
+              <button type="button" class="btn btn-primary" (click)="showPopup(community)">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <hr>
+      <h2>Community Details</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div *ngIf="selectedCommunity">
+        <hr>
+        <form (ngSubmit)="submitForm()">
+          <div class="form-group">
+            <h5>Doctors:</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let doctor of selectedCommunity.doctors">
+                  <td>{{ doctor.name }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group">
+            <h5>Teams:</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let team of selectedCommunity.teams">
+                  <td>{{ team.name }}</td>
+                  <td>{{ team.time }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="submit" class="btn btn-primary">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

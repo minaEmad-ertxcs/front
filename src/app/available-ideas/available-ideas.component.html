@@ -1,0 +1,168 @@
+<div class="container pt-3">
+  <div class="card">
+    <div class="card-body">
+      <h2>Available Ideas</h2>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row">
+            <h4>From Doctor</h4>
+            <div class="col-md-12">
+              <ul class="list-group">
+                <li class="list-group-item mb-3" *ngFor="let idea of listOfIdeas">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>{{ idea.title }}</div>
+                    <div>
+                      <button class="btn btn-primary btn-sm" [disabled]="this.isSended"
+                        (click)="showIdeaDetailsModal(idea)">View</button>
+                    </div>
+                  </div>
+                </li>
+                <div class="alert alert-danger" *ngIf="isEmpty == true">No Ideas</div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <h4>From Companies</h4>
+            <div class="col-md-12">
+              <ul class="list-group">
+                <li class="list-group-item mb-3" *ngFor="let idea of listOfCompaniesIdeas">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>{{ idea.title }}</div>
+                    <div>
+                      <button class="btn btn-primary btn-sm" [disabled]="this.isSended"
+                        (click)="showIdeaDetailsModal(idea)">View</button>
+                    </div>
+                  </div>
+                </li>
+                <div class="alert alert-danger" *ngIf="isEmptyCompany == true">No Ideas</div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ideaDetailsModal" tabindex="-1" role="dialog" aria-labelledby="ideaDetailsModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ideaDetailsModalLabel">{{ selectedIdea?.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Abstract: {{ selectedIdea?.abstract }}</p>
+        <p>Key words: {{ selectedIdea?.Key_words }}</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success btn-sm" (click)="showAddTAsModal(selectedIdea)">Work On</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AddTAs Modal -->
+<div class="modal fade" id="addTAsModal" tabindex="-1" role="dialog" aria-labelledby="addTAsModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTAsModalLabel">Add TAs for {{ selectedIdea?.title }}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <!-- <div *ngIf="role === 0" class="form-group">
+            <label for="doctor">Doctor</label>
+            <select class="form-control" id="doctor" [(ngModel)]="doctor" required>
+              <option value="">Select Doctor</option>
+              <option *ngFor="let doctor of listOfDoctors" [value]="doctor">{{ doctor }}</option>
+            </select>
+          </div> -->
+          <div class="form-group">
+            <label for="ta1">TA 1</label>
+            <select class="form-control" id="ta1" name="ta1" [(ngModel)]="ta1" required>
+              <option value="">Select TA 1</option>
+              <option *ngFor="let ta of listOfTAs" [value]="ta.ta_id">{{ ta.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ta2">TA 2</label>
+            <select class="form-control" id="ta2" name="ta2" [(ngModel)]="ta2" required>
+              <option value="">Select TA 2</option>
+              <option *ngFor="let ta of listOfTAs" [value]="ta.ta_id">{{ ta.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ta3">TA 3</label>
+            <select class="form-control" id="ta3" name="ta3" [(ngModel)]="ta3" required>
+              <option value="">Select TA 3</option>
+              <option *ngFor="let ta of listOfTAs" [value]="ta.ta_id">{{ ta.name }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-sm" (click)="submitTAs()">Submit</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Doctor & TAs Modal -->
+<div class="modal fade" id="addDrsTAsModal" tabindex="-1" role="dialog" aria-labelledby="addTAsModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTAsModalLabel">Add Doctor & TAs for {{ selectedIdea?.title }}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="doctor">Doctor</label>
+            <select class="form-select" id="doctor" name="doctor" [(ngModel)]="doctor" required>
+              <option value="">Select Doctor</option>
+              <option *ngFor="let doctor of listOfDoctors" [value]="doctor.doctor_id">Dr. {{ doctor.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ta1">TA 1</label>
+            <select class="form-select" id="ta1" name="ta1" [(ngModel)]="ta1" required>
+              <option value="">Select TA 1</option>
+              <option *ngFor="let ta of listOfTAs" [value]="ta.ta_id">{{ ta.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ta2">TA 2</label>
+            <select class="form-select" id="ta2" name="ta2" [(ngModel)]="ta2" required>
+              <option value="">Select TA 2</option>
+              <option *ngFor="let ta of listOfTAs" [value]="ta.ta_id">{{ ta.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ta3">TA 3</label>
+            <select class="form-select" id="ta3" name="ta3" [(ngModel)]="ta3" required>
+              <option value="">Select TA 3</option>
+              <option *ngFor="let ta of listOfTAs" [value]="ta.ta_id">{{ ta.name }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-sm" (click)="submitDrsTAs()">Submit</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

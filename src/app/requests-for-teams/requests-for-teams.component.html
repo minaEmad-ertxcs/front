@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Friends Requests</h5>
+          <hr>
+          <div class="list-group " *ngIf="students.length != 0">
+            <a [routerLink]="['students', student.id]" *ngFor="let student of students"
+              class="list-group-item list-group-item-action d-flex justify-content-between align-items-center alert alert-info">
+              <div class="d-flex align-items-center">
+                <img src="assets\image.jpg" alt="Profile Image"
+                  class="rounded-circle mr-3" width="50">
+                <h5 class="card-title m-2">{{student.name}}</h5>
+              </div>
+              <div class="align-items-center">
+                <button class="btn btn-primary m-2" (click)="acceptRequest(student.id)">Confirm</button>
+                <button class="btn btn-secondary" (click)="rejectRequest(student.id)">Delete</button>
+              </div>
+            </a>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="students.length == 0">
+            Not requests yet
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

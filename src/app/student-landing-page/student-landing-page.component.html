@@ -1,0 +1,63 @@
+<section>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary md-4">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link fs-5" routerLink="studenthome" routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link fs-5" routerLink="profile" routerLinkActive="active">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs-5" *ngIf="!inTeam && joinTeams" routerLink="jointeam" routerLinkActive="active">Join a Team</a>
+            <a class="nav-link fs-5" *ngIf="inTeam" routerLink="myteam" routerLinkActive="active">My Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs-5" *ngIf="inTeam && !isFull && isLeader" routerLink="sendRequest"
+              routerLinkActive="active">Send
+              Request</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs-5" *ngIf="inTeam && !this.haveProject && isLeader" routerLink="availableIdeas"
+              routerLinkActive="active">Ideas</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link fs-5" *ngIf="inTeam && this.haveProject" routerLink="myproject"
+              routerLinkActive="active">My Project</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link fs-5" *ngIf="inTeam" routerLink="" routerLinkActive="active">Chat</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link fs-5" routerLink="meetingForLeader" routerLinkActive="active"
+              *ngIf="isLeader">Meeting</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link fs-5" *ngIf="!inTeam" routerLink="friendRequests" routerLinkActive="active"><i
+                class="fas fa-user-plus"></i></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link fs-5" *ngIf="inTeam && !isFull && isLeader" routerLink="RequestsForTeams"
+              routerLinkActive="active"><i class="fas fa-user-plus"></i></a>
+          </li>
+
+          <!-- <li class="nav-item ">
+            <a class="nav-link fs-5" href="#"><i class="fas fa-bell"></i></a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+</section>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

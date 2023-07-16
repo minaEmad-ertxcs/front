@@ -1,0 +1,40 @@
+<div class="container">
+    <h2>Project Files</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group mb-3 d-flex justify-content-between">
+                <label class="form-check-label flex-fill me-2">
+                    <input type="radio" class="form-check-input" name="filter" (change)="filterFiles('first_document')">
+                    First Document Files
+                </label>
+                <label class="form-check-label flex-fill me-2">
+                    <input type="radio" class="form-check-input" name="filter" (change)="filterFiles('second_document')">
+                    Final Document Files
+                </label>
+                <label class="form-check-label flex-fill me-2">
+                    <input type="radio" class="form-check-input" name="filter" (change)="filterFiles('first_presentation')">
+                    First Presentation Files
+                </label>
+                <label class="form-check-label flex-fill me-2">
+                    <input type="radio" class="form-check-input" name="filter" (change)="filterFiles('second_presentation')">
+                    Final Presentation Files
+                </label>
+                <label class="form-check-label flex-fill">
+                    <input type="radio" class="form-check-input" name="filter" (change)="filterFiles('poster')"> Poster Files
+                </label>
+            </div>
+            
+
+            <ul class="list-group mt-3">
+                <li class="list-group-item" *ngFor="let file of filteredFiles">
+                    <label class="form-check-label">
+                        <!-- <input type="text" class="form-check-input" [checked]="selectedFiles.includes(file)"
+                            (change)="toggleFileSelection(file)">
+                        {{ file.file }} -->
+                        <a [href]="getFileUrl(file.file)" download>Project {{ file.project_id }}</a>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

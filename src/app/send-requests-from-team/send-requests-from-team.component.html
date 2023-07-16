@@ -1,0 +1,32 @@
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Send Request to Student</h5>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-secondary" type="button">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+          <div class="list-group">
+            <div class="row mb-3" [routerLink]="['students', student['id']]" *ngFor="let student of students">
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center alert alert-info"
+                style="cursor: pointer;">
+                <div class="d-flex align-items-center">
+                  <img
+                    [src]="student['image'] == null ? './assets/image.jpg' : 'http://127.0.0.1:8000/storage/images/students/' + student['image']"
+                    alt="Profile Image" class="rounded-circle mr-3" width="50">
+                  <h5 class="card-title m-2">{{student['name']}}</h5>
+                </div>
+              </a>
+              <button class="btn btn-primary"
+                (click)="sendRequest(student['id'], 1); $event.stopPropagation();">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

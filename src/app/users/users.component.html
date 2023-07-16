@@ -1,0 +1,87 @@
+<body style="background-color: #f8f9fa;">
+  <div class="container pt-3">
+    <div class="row p-2">
+      <div class="col-md-4 ">
+        <div class="card h-100">
+          <div class="card-body">
+            <h4 class="card-title">User Types</h4>
+            <div class=" row d-flex align-items-center">
+              <div class="col-1 ">
+                <span class="mr-2 ">
+                  <i class="fas fa-users "></i>
+                </span>
+              </div>
+              <div class="col-11">
+                <select class="form-control custom-select " [(ngModel)]="selectedUserType"
+                  (ngModelChange)="showUserList($event)">
+                  <option value="">Select User Type</option>
+                  <option value="students">Students</option>
+                  <option value="doctors">Doctors</option>
+                  <option value="TA">Teaching Assistants</option>
+                  <option value="admins">Admins</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card h-100">
+          <div class="card-body">
+            <h4 class="card-title">Users</h4>
+            <ul class="list-group">
+              <ng-container *ngFor="let user of selectedUserList">
+                <li class="list-group-item m-2 d-flex align-items-center justify-content-between">
+                  <a class="text-decoration-none text-black" [routerLink]="user.role == 1 ? ['studentprofile', user.id] : 
+                    (user.role == 2 ? ['doctorprofile', user.id] : ['taprofile', user.id])">{{
+                    user.name
+                    }}</a>
+                  <!-- <div>
+                    <button *ngIf="selectedUserType === 'doctors'" (click)="upgradeToAdmin(user)"
+                      class="btn m-0 btn-primary btn-sm me-2 ">Upgrade</button>
+                    <button *ngIf="selectedUserType === 'doctors'" (click)="openModal(user)"
+                      class="btn m-0 btn-secondary btn-sm">Set Representative</button>
+                    <button *ngIf="selectedUserType === 'TA'" (click)="upgradeToDoctor(user)"
+                      class="btn m-0 btn-primary btn-sm">Upgrade</button>
+                    <button *ngIf="selectedUserType === 'admins'" (click)="degradeToDoctor(user)"
+                      class="btn m-0 btn-secondary btn-sm">Degrade</button>
+                  </div> -->
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="representativeModal" tabindex="-1" role="dialog"
+    aria-labelledby="representativeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="representativeModalLabel">Add Representative</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="representativeEmail">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="representativePassword">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm" (click)="saveRepresentative()">Save</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"
+            aria-label="Close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

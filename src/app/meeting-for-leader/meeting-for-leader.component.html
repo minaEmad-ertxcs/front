@@ -1,0 +1,81 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Create Meeting For Your Team</h5>
+                    <hr>
+                    <div class="list-group">
+                        <div class="list-group-item d-flex justify-content-center align-items-center">
+                            <button class="btn btn-primary m-2" id="createMeetingButton" data-bs-toggle="modal"
+                                data-bs-target="#meetingModal">Create Meeting</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <!-- <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">All Your Meetings</h5>
+                        <hr>
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-center align-items-center" *ngFor="let meeting of meetings">
+                                <div>{{meeting.join_url}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row" *ngIf="join_url != ''">
+            <div class="col-md-12 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Your Meeting URL</h5>
+                        <hr>
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-center align-items-center">
+                                Join URL: <a href="{{ join_url }}">{{ join_url }}</a>
+                                <br>
+                                <button class="btn btn-danger m-2" id="DeleteMeetingButton">Delete Meeting</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="meetingModal" tabindex="-1" role="dialog" aria-labelledby="meetingModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="meetingModalLabel">Create Meeting</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="meetingNameInput" class="form-label">Meeting Name:</label>
+                        <input type="text" class="form-control" id="meetingNameInput" [(ngModel)]="meetingName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="meetingPasswordInput" class="form-label">Meeting Password:</label>
+                        <input type="password" class="form-control" id="meetingPasswordInput"
+                            [(ngModel)]="meetingPassword">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="createMeeting()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row justify-content-center p-2 m-2">
+    <div class="col-md-6 col-sm-12 mb-2">
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-funnel-fill"></i>
+          Year:
+        </span>
+        <select class="form-select" [(ngModel)]="selectedYear" (ngModelChange)="filterData()">
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 mb-2">
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-funnel-fill"></i>
+          Department:
+        </span>
+        <select class="form-select" [(ngModel)]="selectedDepartment" (ngModelChange)="filterData()">
+          <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-3 col-sm-12 mb-2">
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-funnel-fill"></i>
+          Supervisor:
+        </span>
+        <select class="form-select" [(ngModel)]="selectedSupervisor" (ngModelChange)="filterData()">
+          <option *ngFor="let supervisor of supervisors" [value]="supervisor">{{ supervisor }}</option>
+        </select>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3 *ngIf="countFilteredData === 0">
+        All Projects
+      </h3>
+      <h3 *ngIf="countFilteredData > 0">
+        Search Result
+      </h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-12 mb-3" *ngFor="let project of filteredData">
+      <div class="card">
+        <img src="./assets/OIP.jpg" class="card-img-top w-100" alt="Project Image">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ project.title }}</h5>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#projectModal"
+            (click)="openModal(project)">View</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="projectModalLabel">{{ selectedProject?.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p>Abstract: {{ selectedProject?.abstract }}</p>
+        <p>Key Words: {{ selectedProject?.Key_words }}</p>
+      </div>
+    </div>
+  </div>
+</div>

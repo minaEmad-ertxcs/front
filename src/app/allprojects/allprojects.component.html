@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="form-group" *ngIf="userRole !== 0">
+            <div class="input-group mb-2">
+              <span class="input-group-text">
+                <i class="bi bi-funnel-fill"></i>
+              </span>
+              <!-- <select class="form-select" [(ngModel)]="selectedSupervisor" (ngModelChange)="filterBySupervisor()">
+                <option value="" selected disabled>Select Supervisor</option>
+                <option *ngFor="let supervisor of supervisors" [value]="supervisor">{{ supervisor }}</option>
+              </select> -->
+            </div>
+          </div>
+          <div class="form-group" *ngIf="userRole === 0">
+            <div class="input-group mb-2">
+              <span class="input-group-text">
+                <i class="bi bi-funnel-fill"></i>
+              </span>
+              <select class="form-select" [(ngModel)]="selectedDepartment" (ngModelChange)="filterByDepartment()">
+                <option value="" selected disabled>Select Department</option>
+                <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+              </select>
+            </div>
+          </div>
+          <ul class="list-group" id="project-list">
+            <li class="list-group-item mb-2" *ngFor="let project of projects">
+              <button class="btn btn-link project-button text-decoration-none" (click)="onProjectButtonClick(project)">
+                Project: {{ project.title }}
+              </button>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="text-center">
+            <div class="d-flex justify-content-center mb-3">
+              <img class="card-img-top" src="./assets/team.jpg" alt="Project image"
+                style="width: 20%; height: 30%; border-radius: 100%;">
+            </div>
+            <h5 class="card-title" id="project-title">{{ projectTitle }}</h5>
+          </div>
+          <div class="row p-2">
+            <div class="col-md-12 mb-3">
+              <div class="card" *ngIf="projectAbstract">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted">Abstract : {{ projectAbstract }}</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mb-3">
+              <div class="card" *ngIf="projectKeywords">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted">Key Words: {{ projectKeywords }}</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mb-3">
+              <div class="card" *ngIf="doctor">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted">Supervisor: {{ doctor }}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

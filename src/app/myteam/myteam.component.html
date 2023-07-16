@@ -1,0 +1,172 @@
+<div class="container p-3">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- Card 1: User Information -->
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="text-center">
+            <img src="./assets/team.jpg" class="rounded-circle mb-3" alt="User Image" width="150">
+          </div>
+          <h5 class="card-title">TeamName: Team {{myTeam?.team_id}}</h5>
+          <p class="card-text">Leader: {{myTeam?.members.leader}}</p>
+          <div class="row">
+            <button class="btn btn-danger" *ngIf="!isLeader" (click)="leaveTeam()">Leave the Team</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="alert alert-danger" *ngIf="message!==''">{{message}}</div>
+      <!-- Card 2: Team Members and Departments -->
+      <div class="card h-100" *ngIf="message==''">
+        <div class="card-body">
+          <div class="d-flex flex-wrap">
+            <div class="card mb-3 me-3 col-12  p-3">
+              <h5 class="card-title">Team Members</h5>
+              <div class="row g-0 mb-2" *ngFor="let member of mappedArray;let i = index">
+                <div class="col-md-2">
+                  <img [src]="images[i]==''? userImage:images[i]" class="card-img rounded-circle" alt="Member 1 Image"
+                    width="10px" height="120px">
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <div class="row">
+                      <h6 class="card-title p-4 col-md-6">{{member.name}}</h6>
+                      <h6 class="card-title p-4 col-md-6"> Department: <span
+                          class="text-primary">{{member.department}}</span></h6>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <h5 class="card-title mt-3">Supervisors</h5>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card mb-3 ">
+                    <div class="card-body">
+                      <p class="card-text">Doctor Name: {{myTeam.dr == null ? "No Dr yet.": "Dr." + myTeam.dr}}</p>
+                      <hr>
+                      <p class="card-text">TA Name: {{myTeam.ta == null ? "No TA yet.": "Eng." + myTeam.ta}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="haveIdea != null && haveProject == false">
+                <h5 class="card-title mt-3">Your Idea</h5>
+                <div class="col-md-12">
+                  <div class="card mb-3 ">
+                    <div class="card-body">
+                      <p class="card-text">Title: {{myIdea.title}}</p>
+                      <hr>
+                      <p class="card-text">Abstract: {{myIdea.abstract}}</p>
+                      <hr>
+                      <p class="card-text">KeyWords: {{myIdea.Key_words}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="haveIdea == null && haveProject == false && isLeader == true">
+                <h5 class="card-title mt-3">Add Your Idea</h5>
+                <button class="btn btn-primary col-12" (click)="openAddIdeaModal()">Add Idea</button>
+              </div>
+
+              <div *ngIf="haveIdea != null">
+                <h5 class="card-title mt-3">Cancel Your Idea</h5>
+                <button class="btn btn-danger col-12" (click)="deleteIdea()">Delete</button>
+              </div>
+
+              <div class="row" *ngIf="haveProject == true">
+                <h5 class="card-title mt-3">Your Project</h5>
+                <div class="col-md-12">
+                  <div class="card mb-3 ">
+                    <div class="card-body">
+                      <p class="card-text">Title: {{myProject.title}}</p>
+                      <hr>
+                      <p class="card-text">Abstract: {{myProject.abstract}}</p>
+                      <hr>
+                      <p class="card-text">KeyWords: {{myProject.Key_words}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="addIdeaModal" tabindex="-1" role="dialog" aria-labelledby="addIdeaModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addIdeaModalLabel">Add Idea</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+
+
+              <div class="form-group">
+                <label for="doctorName">Preferred Doctor:</label>
+                <select class="form-control" id="doctorName" [(ngModel)]="newIdea.doctor_id"
+                  [ngModelOptions]="{ standalone: true }">
+                  <option *ngFor="let dr of doctors" value="{{dr.doctor_id}}">Dr. {{dr.name}}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="ta3">TA 1</label>
+                <select class="form-control" id="ta1" name="ta1" [(ngModel)]="ta1" required>
+                  <option value="">Select TA 3</option>
+                  <option *ngFor="let ta of listOfTAs" [value]="ta.ta_id">{{ ta.name }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ta3">TA 2</label>
+                <select class="form-control" id="ta2" name="ta2" [(ngModel)]="ta2" required>
+                  <option value="">Select TA 3</option>
+                  <option *ngFor="let ta of listOfTAs" [value]="ta.ta_id">{{ ta.name }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ta3">TA 3</label>
+                <select class="form-control" id="ta3" name="ta3" [(ngModel)]="ta3" required>
+                  <option value="">Select TA 3</option>
+                  <option *ngFor="let ta of listOfTAs" [value]="ta.ta_id">{{ ta.name }}</option>
+                </select>
+              </div>
+
+
+              <div class="form-group">
+                <label for="title">Idea Title:</label>
+                <input type="text" class="form-control" id="title" [(ngModel)]="newIdea.title"
+                  [ngModelOptions]="{ standalone: true }">
+              </div>
+              <div class="form-group">
+                <label for="ideaDescription">Idea Abstract:</label>
+                <textarea class="form-control" id="ideaDescription" rows="3" [(ngModel)]="newIdea.ideaDescription"
+                  [ngModelOptions]="{ standalone: true }"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="technology">Keyword:</label>
+                <input type="text" class="form-control" id="technology" [(ngModel)]="newIdea.technology"
+                  [ngModelOptions]="{ standalone: true }">
+              </div>
+              <div class="mb-3 mt-3">
+                <input class="form-control" type="file" id="fileInput" (change)="onFileChange($event)">
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="addIdea()">Add Idea</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+    </div>

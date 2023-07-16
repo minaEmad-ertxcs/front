@@ -1,0 +1,30 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="" id="team-content">
+                        <img class="card-img-top" src="./assets/team.jpg" alt="Team image"
+                            style="width:20%; height:30%; border-radius: 100%; margin-left: 40%; margin-top: 2%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Idea: {{idea.title}} </h5>
+                            <h5 class="card-text">Abstract: {{idea.abstract}} </h5>
+                            <h5 class="card-text">Key Words: {{idea.Key_words}} </h5>
+                            <h5 class="card-text">Author: {{idea.author}} </h5>
+                            <div class="row border rounded p-2 m-2" *ngFor="let member of ideaMembers">
+                                <div class="col-md-2">
+                                    <img src="./assets/team.jpg" class="card-img rounded-circle" alt="Member 1 Image" width="10px">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title p-4">member</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

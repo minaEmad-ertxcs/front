@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <!-- <select class="form-control custom-select " [(ngModel)]="selectedDepartment"
+            (ngModelChange)="showDepartmentChart($event)">
+            <option value="">Select Department</option>
+            <option value="CS">CS</option>
+            <option value="IS">IS</option>
+            <option value="AI">AI</option>
+            <option value="IT">IT</option>
+            <option value="DS">DS</option>
+          </select> -->
+          <div class="row justify-content-center mt-4 p-2">
+            <h5>Team Registration</h5>
+            <div class="col-md-5">
+              <div class="h-100">
+                <canvas #pieChartCanvas id="pieChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <hr>
+          <div class="row justify-content-center mt-4 p-2">
+            <div class="col-md-12">
+              <div class="h-100">
+                <h5>Number of Teams for Each TA</h5>
+                <canvas #barChartCanvas id="barChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <hr>
+          <div class="row justify-content-center mt-4 p-2">
+            <div class="col-md-12">
+              <div class="h-100">
+                <h5>Number of Teams for Each Doctor</h5>
+                <canvas #histogramChartCanvas id="histogramChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <hr>
+          <div class="row justify-content-center mt-5 p-2">
+            <div class="col-md-12">
+              <div class="h-100">
+                <h5>Tasks for Each Team</h5>
+                <canvas #teamTaskChartCanvas></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

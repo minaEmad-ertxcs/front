@@ -1,0 +1,33 @@
+<section>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary md-4">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav" style="margin-left: 120px;">
+                <li class="nav-item me-3">
+                    <a class="nav-link fs-5" routerLink="doctorhome" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link fs-5" routerLink="doctorideas" routerLinkActive="active">Ideas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" routerLink="Teams" routerLinkActive="active">Teams</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ms-auto" *ngIf="!isFull">
+                <li class="nav-item" style="margin-right: 120px;">
+                    <a class="nav-link fs-5" routerLink="doctorrequests" routerLinkActive="active"><i
+                            class="fas fa-user-plus"></i></a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+</section>
+
+<div>
+    <router-outlet></router-outlet>
+</div>
